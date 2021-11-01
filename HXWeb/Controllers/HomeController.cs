@@ -41,7 +41,7 @@ namespace ExamWeb.Controllers
                     if (result.Count == 1)
                     {
                         Session.Clear();
-                        Session["Manager"] = result[0].ManagerName;//保持管理员登录状态
+                        Session["Manager"] = result[0].ManagerName;// 保持管理员登录状态
                         return RedirectToAction("Index");
                     }
                 }
