@@ -1,0 +1,29 @@
+﻿
+@{ ViewBag.Title = "Eidt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var a = ViewBag.a as List<HXWeb.Models.Hospital>; }
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/global.css" rel="stylesheet" />
+
+<h2>编辑接种时间</h2>
+<hr />
+<form action="~/Manager/date3">
+    <div class="form-group">
+        <label class="control-label col-md-2">请选择要编辑的医院</label>
+        <div class="col-md-10">
+            <select class="form-control text-box  single-line" name="ID">
+                @foreach (var item in a)
+                {
+                    <option value="@item.ID">@item.HospitalName</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value=" 编辑 " class="btn btn-primary" />
+        </div>
+    </div>
+</form>

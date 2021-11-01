@@ -1,0 +1,130 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<span class="field-validation-valid" data-valmsg-for="Login_Nmae" data-valmsg-replace="true"></span>*@
+
+@section style{
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+}
+
+
+
+<h3>管理员登录</h3>
+<hr />
+<form action="LoginManager" method="post" id="asdsad">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="form-group">
+                <label>账号</label>
+                <input class="form-control" name="ManagerLoginName" type="text" style="width:100%" />
+                @Html.ValidationMessage("ManagerLoginName")
+                <span id="NameMsg" style="color:red"></span>
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input class="form-control" name="ManagerPwd" type="password" style="width:100%" />
+                @Html.ValidationMessage("ManagerPwd")
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <label>验证码</label>
+                        <input class="form-control" name="Login_Code"  style="width:100%" />
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div style="position:relative;top:16px">
+                        <img src="~/Handlers/YanzhengmaHandler1.ashx?id=1" onclick="this.src=this.src+1" style="width:120px;height:35px;" />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="form-control btn btn-primary" id="submit">登录</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <script src="~/Scripts/jquery-1.8.3.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.metadata.js"></script>
+    <script src="~/Scripts/jquery.validate.messages_cn.js"></script>
+
+    <script>
+        $(function () {
+
+            $.validator.addMethod("checkName", function (value, element, params) {
+                var checkName = /^[a-zA-Z][a-zA-Z0-9]{3,16}$/;
+                return this.optional(element) || (checkName.test(value));
+            }, "以字母开头，内容包括字母和数字，长度3-16");
+
+            //事件源 jquery验证
+            $("#asdsad").validate({
+                rules: {
+                    Login_Nmae: { required: true, checkName: true },
+                    Login_Pwd: { required: true, rangelength: [3, 12] },
+                    Login_Code: { required: true }
+                },
+                messages: {
+                    Login_Nmae: { required: "账户不允许为空！" },
+                    Login_Pwd: { required: "密码不允许为空！" },
+                    Login_Code: { required: "验证不允许为空！" }
+                }
+            });
+        });
+    </script>
+
+
+    @*<script type="text/javascript">
+            $(function () {
+                $("#Login_Nmae").bind("blur", CheckLoginNmae)
+                $("#Login_Pwd").bind("blur", CheckLoginPwd)
+                $("form").bind("submit", CheckForm)//必须为form
+            })
+            function CheckForm() {
+                if (CheckLoginNmae() && CheckLoginPwd()) {
+                    return true;
+                }
+                CheckLoginPwd();
+                return false;
+            }
+
+            function CheckLoginNmae() {
+                var result = $("#Login_Nmae").val();
+
+                var expr = /^[a-zA-Z][a-zA-Z0-9]{3,16}$/;
+
+                if (result == "") {
+                    $("#NameMsg").html("请输入账号！");
+                }
+                else if (!expr.test(result)) {
+                    $("#NameMsg").html("以字母开头，内容包括字母和数字，长度3-16");
+                } else {
+                    $("#NameMsg").html("");
+                    return true;
+                }
+                return false;
+            }
+            function CheckLoginPwd() {
+                var result = $("#Login_Pwd").val();
+                var expr = /^.{3,6}$/;
+                if (result == "") {
+                    $("#PwdMsg").html("请输入密码！");
+                }
+                else if (!expr.test(result)) {
+                    $("#PwdMsg").html("密码不能为空！长度3-6");
+                } else {
+                    $("#PwdMsg").html("");
+                    return true;
+                }
+                return false;
+            }
+        </script>*@
+}

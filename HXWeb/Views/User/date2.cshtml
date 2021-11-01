@@ -1,0 +1,82 @@
+﻿
+@{ ViewBag.Title = "date2";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/global.css" rel="stylesheet" />
+<form method="post">
+    <h2>根据地区查询</h2>
+    <select name="address" class=" text-box  single-line" style="width:60%;height:40px;" >
+        <option value="">全部地区</option>
+        @foreach (var item in ViewBag.address as List<HXWeb.Models.Address>)
+        {
+            <option value="@item.ID">@item.Address1</option>
+        }
+    </select>
+    <input type="submit" value="查询" class="btn btn-primary"/>
+</form>
+<h2>用户登记列表</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>电话</th>
+            <th>所在地区</th>
+            <th>预约医院</th>
+            <th>预约时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.User as IList<HXWeb.Models.Users>)
+        {
+<tr>
+    <td>@item.UserName</td>
+    <td>@(item.UserSex==1 ? "男" : "女")</td>
+    <td>@item.UserPhone</td>
+    <td>@foreach (var item2 in ViewBag.address as List<HXWeb.Models.Address>)
+    {
+        if (item2.ID==item.AddressID)
+        {
+            @item2.Address1;
+            break;
+        }
+    }</td>
+    <td>@foreach (var item2 in ViewBag.hospital as List<HXWeb.Models.Hospital>)
+    {
+        if (item2.ID==item.Hospital)
+        {
+            @item2.HospitalName;
+            break;
+        }
+    }
+    </td>
+        <td>@Convert.ToDateTime(item.Date).ToString("yyyy-MM-dd")</td>
+        <td>
+            @foreach (var item2 in ViewBag.hospital as List<HXWeb.Models.Hospital>)
+            {
+                if (item.Hospital == item2.ID)
+                {
+                    if (item.Date < item2.StartDate)
+                    {
+                        <span>该医院尚未发布接种信息</span>
+                    }
+                    else if (item.Date > item2.EndDate)
+                    {
+                        <span>已逾期,无法接种</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("查看预约", "date3", new { ID = item.UserID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("电话提醒", "date4", new { ID = item.UserID }, new { @class = "btn btn-danger" })
+                    }
+                }
+            }
+
+        </td>
+</tr>
+        }
+    </tbody>
+</table>
+   

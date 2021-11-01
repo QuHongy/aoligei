@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "date1";
+    var user123 = ViewBag.user123 as HXWeb.Models.Users;
+}
+<table class="table" style="width:40%">
+
+    <tr>
+        <td><b>预约编号</b></td>
+        <td>@user123.UserID.ToString()</td>
+    </tr>
+    <tr>
+        <td><b>用户名</b></td>
+        <td>@user123.UserName.ToString()</td>
+    </tr>
+    <tr>
+        <td><b>手机号</b></td>
+        <td>@user123.UserPhone.ToString()</td>
+    </tr>
+    <tr>
+        <td><b>所在地区</b></td>
+        <td>@foreach (var item in ViewBag.address as List<HXWeb.Models.Address>)
+        {
+            if (item.ID==user123.AddressID)
+            {
+                @item.Address1;
+                break;
+            }
+        }</td>
+    </tr>
+    <tr>
+        <td><b>预约日期</b></td>
+        <td>@Convert.ToDateTime(user123.Date).ToString("yyyy-MM-dd")</td>
+    </tr>
+    <tr>
+        <td><b>预约医院</b></td>
+        <td>@foreach (var item in ViewBag.hospital as List<HXWeb.Models.Hospital>)
+        {
+            if (item.ID==user123.Hospital)
+            {
+                @item.HospitalName;
+                break;
+            }
+        }</td>
+    </tr>
+    <tr>
+        <td><a href="~/User/date2" class="btn btn-primary">返回</a></td>
+
+        <td><a href="~/User/date4/@user123.UserID" class="btn btn-danger">电话提醒</a></td>
+    </tr>
+</table>

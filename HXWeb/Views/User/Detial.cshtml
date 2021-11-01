@@ -1,0 +1,43 @@
+﻿
+@{ ViewBag.Title = "Detial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var User = ViewBag.User as HXWeb.Models.Users;
+    string sex = User.UserSex == 1 ? "男" : "女"; }
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/global.css" rel="stylesheet" />
+
+<h2>信息详情</h2>
+<hr />
+<table class="table" style="width:40%">
+    <tr>
+        <td><b>ID</b></td>
+        <td><b>@User.UserID</b></td>
+    </tr>
+    <tr>
+        <td><b>姓名</b></td>
+        <td>@User.UserName</td>
+    </tr>
+    <tr>
+        <td><b>性别</b></td>
+        <td>@sex</td>
+    </tr>
+    <tr>
+        <td><b>手机号</b></td>
+        <td>@User.UserPhone</td>
+    </tr>
+    <tr>
+        <td><b>地址</b></td>
+        <td>@User.UserAddress</td>
+    </tr>
+</table>
+@if (Session["Manager"] != null)
+{
+<a href="/User/index" class="btn btn-primary">返回</a> }
+ else if (Session["User"] != null)
+{
+<a href="/User/date" class="btn btn-primary">预约接种</a>}
+
+
+

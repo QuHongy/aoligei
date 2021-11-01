@@ -1,0 +1,49 @@
+﻿
+@{ ViewBag.Title = "Create";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/global.css" rel="stylesheet" />
+<h2>发布接种日期</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    if (ViewBag.hospital == null)
+    {
+        <h3>当前没有医院需要发布接种日期</h3>
+    }
+    else { 
+        <div class="form-group">
+    <label class="control-label col-md-2" for="StuName">请选择医院</label>
+    <div class="col-md-10">
+        <select name="ID">
+            @foreach (var item in ViewBag.hospital as List<HXWeb.Models.Hospital>)
+            {
+                <option value="@item.ID">@item.HospitalName</option>
+            }
+        </select>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2" for="StuName">接种起始日期</label>
+    <div class="col-md-10">
+        <input type="date" name="StartDate" class="form-control text-box  single-line" required />
+        
+    </div>
+</div>
+
+ <div class="form-group">
+     <label class="control-label col-md-2" for="StuLoginName">接种结束日期</label>
+     <div class="col-md-10">
+         <input type="date" name="EndDate" class="form-control text-box  single-line" required />
+         
+     </div>
+     </div>
+        <div class="form-group">
+             <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value=" 保存 " class="btn btn-primary" />
+             </div>
+         </div>}
+
+    }
+    

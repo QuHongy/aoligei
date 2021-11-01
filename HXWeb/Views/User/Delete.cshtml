@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var users = ViewBag.User as HXWeb.Models.Users;
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/global.css" rel="stylesheet" />
+
+<h2>删除用户信息</h2>
+<br />
+<h4>是否确认删除</h4>
+<hr />
+<span> 用户名</span>
+@using (Html.BeginForm("delete"))
+{
+    <div style="width:40%">
+        <table class="table table-bordered">
+            <tr>
+                <td><b>姓名</b></td>
+                <td>@users.UserName</td>
+            </tr>
+            <tr>
+                <td><b>手机号</b></td>
+                <td>@users.UserPhone</td>
+            </tr>
+        </table>
+        <input name="UserID" value=@users.UserID type="hidden" />
+        <input type="submit" value="删除" class="btn btn-danger" />
+        <a href="/User/index" class="btn btn-primary">返回</a>
+    </div>
+}

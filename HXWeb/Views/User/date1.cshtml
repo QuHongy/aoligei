@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "date1";
+    var user = ViewBag.user as HXWeb.Models.Users;
+}
+<h2>信息确认</h2>
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/global.css" rel="stylesheet" />
+<table class="table" style="width:40%">
+    <tr>
+        <td>姓名</td>
+        <td>@user.UserName</td>
+    </tr>
+    <tr>
+        <td>性别</td>
+        <td>
+            @if (user.UserSex == 0)
+            {
+                <span>女</span>
+            }
+            else
+            {
+                <span>男</span>
+            }
+        </td>
+    </tr>
+    <tr>
+        <td>手机号</td>
+        <td>@user.UserPhone</td>
+    </tr>
+    <tr>
+        <td>所在地</td>
+        <td>
+            @ViewBag.address
+        </td>
+    </tr>
+    <tr>
+        <td>详细地址</td>
+        <td>@user.UserAddress</td>
+    </tr>
+    <tr>
+        <td>确认日期</td>
+        <td>@Convert.ToDateTime(user.Date).ToString("yyyy-MM-dd")</td>
+    </tr>
+</table>
+    <a href="~/User/date5" class="btn btn-primary">完成操作</a>
+

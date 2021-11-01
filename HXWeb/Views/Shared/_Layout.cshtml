@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>华夏新冠疫苗接种信息管理系统 - 首页</title>
+
+    <!--导入项目所需的样式文件-->
+
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/global.css" rel="stylesheet" />
+    <style>
+      .aoligei{
+          width:100%;
+          margin:0 auto;
+      }
+      b{
+          font-size:25px;
+      }
+    </style>
+    @RenderSection("style", required: false)
+</head>
+
+<body>
+    <div id="all">
+        <!--页眉-->
+        <!--未登录-->
+        <div id="header">
+            <div id="logo"><span id="logotxt">华夏新冠疫苗</span></div>
+            <div id="loginmsg">
+                @if (Session["Manager"] != null)
+                {
+                    <span>@Session["Manager"] 您好，欢迎光临后台系统</span>
+                    <a href="/Home/Index?exit=1">退出登录</a>
+                }
+                else if (Session["User"] != null)
+                {
+                    <span>@Session["User"] 您好，欢迎光临在线全自动办理系统</span>
+                    <a href="/Home/Index?exit=1">结束取号</a>
+                }
+                else
+                {
+                    <a href="/Home/LoginManager"><b>管理员登录</b></a>
+                    <a href="/Home/LoginUser"><b>自助办理</b></a>
+                }
+            </div>
+
+            <div style="clear:both;"></div>
+        </div>
+        <div id="menu">
+            <ul>
+                @if (Session["Manager"] != null)
+                {
+                    <li><a href="/Manager/Index">管理员管理</a></li>
+                    <li><a href="/User/date2">用户预约信息管理</a></li>
+                    <li><a href="/Manager/date2">接种日期管理</a></li>
+                    <li><a href="/Manager/date">发布接种日期</a></li>
+                }
+                else if (Session["User"] != null)
+                { 
+                }
+
+                <div style="clear:both;"></div>
+            </ul>
+        </div>
+
+        @if (!Request.RawUrl.ToLower().Contains("/home/index"))
+        {
+            <div id="content" style="width:75%">
+                <!--页面内容部分-->
+                <link href="~/Content/Site.css" rel="stylesheet" />
+                <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+                <link href="~/Content/global.css" rel="stylesheet" />
+                @RenderBody()
+
+                <!--页脚-->
+                <div id="footer">
+                    <hr style="margin:20px 0px;" /> 华夏新冠疫苗接种管理系统
+                </div>
+            </div>
+        }
+        else
+        {
+            <div id="content">
+                <!--页面内容部分-->
+
+                @RenderBody()
+
+                <!--页脚-->
+                <div id="footer">
+                    <hr style="margin:20px 0px;" /> 华夏新冠疫苗接种管理系统
+                </div>
+            </div>
+        }
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

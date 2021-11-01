@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Detial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var manager = ViewBag.Manager as HXWeb.Models.Manager;
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/global.css" rel="stylesheet" />
+
+<h2>信息详情</h2>
+<hr />
+<table class="table" style="width:40%">
+    <tr>
+        <td><b>id</b></td>
+        <td>@manager.ManagerID</td>
+    </tr>
+    <tr>
+        <td><b>登录名</b></td>
+        <td>@manager.ManagerLoginName</td>
+    </tr>
+    <tr>
+        <td><b>姓名</b></td>
+        <td>@manager.ManagerName</td>
+    </tr>
+    <tr>
+        <td><b>手机号</b></td>
+        <td>@manager.ManagerPhone</td>
+    </tr>
+    <tr>
+        <td><b>邮箱</b></td>
+        <td>@manager.ManagerEmail</td>
+    </tr>
+</table>
+<a href="/Manager/index" class="btn btn-primary">返回</a>
+
+

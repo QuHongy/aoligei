@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "LoginStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/global.css" rel="stylesheet" />
+
+<h3>自助取号</h3>
+<hr />
+<div class="form-group">
+    <label for="exampleInputEmail1">您的号码为</label>
+    <label for="exampleInputEmail1">@Session["UserID"]</label>
+    <label for="exampleInputEmail1">请牢记您的号码并点击进入功能</label><br>
+    <a href="~/User/Eidt?UserID=@Session["UserID"]" class="btn btn-primary">进入功能</a>
+</div>
+
+
